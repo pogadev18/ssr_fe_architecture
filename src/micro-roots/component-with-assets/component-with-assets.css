@@ -1,0 +1,10 @@
+.container {
+    width: 50%;
+}
+
+/* wanted to have a test of CSS modules here
+but for typesafe modules we require a build step */
+.image-with-dash {
+    width: 100%;
+    height: auto;
+}

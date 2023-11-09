@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Your App</title>
+
+    <!-- a string array as the query param value for param components -->
+    <esi:include
+      src="/dependecies?components=carousel,panel,component-with-assets"
+    />
+  </head>
+  <body>
+    <!--  esi includes after the Shell JS because it exposes methods that will be called
+        by the included html-->
+    <div id="root">
+      <div>Hello World</div>
+    </div>
+
+    <esi:include
+      src="/component/carousel?path=/content/webshop30_de/de/gaming/xbox/ueberblick/dienste-und-abos/xbox-all-access/jcr:content/parMainContent/productcaroussel_cop&baseUrl=https://aem-aws-dev.cyberport.de&productSearchQuery=iphone"
+    />
+    <esi:include
+      src="/component/carousel?path=/content/webshop30_de/de/apple-und-zubehoer/apple-dep/jcr:content/parMainContent/productcarousselcont_1900504225/parCarousselContainer/productcaroussel_cop&baseUrl=https://aem-aws-dev.cyberport.de&productSearchQuery=laptop"
+    />
+
+    <esi:include src="/component/component-with-assets" />
+  </body>
+</html>
