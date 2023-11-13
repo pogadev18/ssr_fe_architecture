@@ -1,49 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Your App</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>React Islands</title>
   </head>
+  
   <body>
-    <!--    
-    JSPM Generator Import Map
-    Edit URL: https://generator.jspm.io/#U2VhYGBiDs0rySzJSU1hKEpNTC7RTcnPdTC00DPSM4AIQDkAFVlTAiwA
-    -->
-    <script type="importmap">
-      {
-        "imports": {
-          "react": "https://ga.jspm.io/npm:react@18.2.0/dev.index.js",
-          "react-dom/client": "https://ga.jspm.io/npm:react-dom@18.2.0/dev.client.js"
-        },
-        "scopes": {
-          "https://ga.jspm.io/": {
-            "react-dom": "https://ga.jspm.io/npm:react-dom@18.2.0/dev.index.js",
-            "scheduler": "https://ga.jspm.io/npm:scheduler@0.23.0/dev.index.js"
-          }
-        }
-      }
-    </script>
-    <!-- ES Module Shims: Import maps polyfill for older browsers without import maps support (eg Safari 16.3) -->
-    <script
-      async
-      src="https://ga.jspm.io/npm:es-module-shims@1.8.0/dist/es-module-shims.js"
-      crossorigin="anonymous"
-    ></script>
-
-    <!--  esi includes after the Shell JS because it exposes methods that will be called
-        by the included html-->
-    <div id="root">
-      <div>Hello World</div>
-    </div>
-    <!-- <esi:include src="/component/header?id=4324435e" /> -->
-
+    <!-- beware, commenting will still run the include, breaking the html generation -->
     <esi:include
       src="/component/carousel?path=/content/webshop30_de/de/gaming/xbox/ueberblick/dienste-und-abos/xbox-all-access/jcr:content/parMainContent/productcaroussel_cop&baseUrl=https://aem-aws-dev.cyberport.de&productSearchQuery=iphone"
     />
     <esi:include
       src="/component/carousel?path=/content/webshop30_de/de/apple-und-zubehoer/apple-dep/jcr:content/parMainContent/productcarousselcont_1900504225/parCarousselContainer/productcaroussel_cop&baseUrl=https://aem-aws-dev.cyberport.de&productSearchQuery=laptop"
     />
-
-    <esi:include src="/component/component-with-assets" />
+    <esi:include
+        src="/component/component-with-assets"
+    />
+    <esi:include
+        src="/component/another-folder"
+    />
   </body>
 </html>
-`

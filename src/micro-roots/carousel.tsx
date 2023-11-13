@@ -8,12 +8,16 @@ import ProductHit from '../components/ProductHit';
 import './carousel.css';
 import './carousel-test-if-multiple-bundles-get-created.css';
 
+// mark this component as server only, so no React hydration
+// happens for it
+export const islandType = 'server-only'
+
 function Carousel(props: {
   id: string;
-  carouselProducts: MinimalProductInformation[];
+  carouselProducts?: MinimalProductInformation[];
 }) {
   return (
-    <div className="bg-red">
+    <div className="carousel-wrapper">
       <h1 style={{ fontSize: '20px', fontWeight: 'bold' }}>
         Carousel {props.id}: {props.id}
       </h1>
@@ -27,7 +31,7 @@ function Carousel(props: {
           overflowX: 'scroll',
         }}
       >
-        {props.carouselProducts.map((product) => (
+        {props.carouselProducts?.map((product) => (
           <ProductHit key={product.titleLong} product={product} />
         ))}
       </ul>
