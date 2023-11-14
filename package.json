@@ -6,7 +6,7 @@
     "dev": "bun run index.ts",
     "edge-worker-proxy": "bun run src/edge-worker-proxy/server.ts",
     "esi-proxy": "bun run src/esi-proxy/server.ts",
-    "build": "npm run build:css-modules && npm run build:micro-roots && npm run build:micro-roots-cjs",
+    "build": "npm run build:css-modules && npm run build:micro-roots && npm run build:micro-roots-cjs && npm run build:components-server",
     "watch": "vite build --watch -c vite.config.ts & npm run watch:css-modules",
     "build:micro-roots": "vite build -c vite.config.ts",
     "build:micro-roots-cjs": "BUNDLE_TARGET=cjs vite build -c vite.config.ts",
