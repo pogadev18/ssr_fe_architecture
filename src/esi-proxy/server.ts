@@ -5,6 +5,7 @@ import ESI from 'nodesi'
 
 const esiServer = express()
 const port = process.env.ESI_PROXY_PORT ?? 3000
+
 const esi = new ESI({
     baseUrl: 'http://localhost:3001',
     onError: function(src, error) {

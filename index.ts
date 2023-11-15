@@ -65,7 +65,6 @@ app.get('/', (_req, res) => {
 app.use('/dist', express.static(join(scriptWorkingDir, 'dist')));
 app.use('/assets', express.static(join(scriptWorkingDir, 'dist/es/assets')));
 
-// Server the shell app JS for now
 app.get('/component/:compDeclaration', async (req, res) => {
   try {
     const { compDeclaration } = req.params;
