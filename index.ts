@@ -171,15 +171,14 @@ app.get('/htmx/:compDeclaration/:action', async (req, res) => {
           res.send(html);
         }
       } catch (error) {
-        console.log('error fetching static props for', compDeclaration, error);
-        res.status(500).send('An error occurred while fetching static props');
+        console.log('error while using htmx actions', compDeclaration, error);
       }
     }
   } catch (error) {
     console.log(`${req.params.compDeclaration}`, error);
     res
       .status(500)
-      .json({ error: 'An error occurred while rendering the component.' });
+      .json({ error: 'An error occurred while using htmx actions..' });
   }
 });
 
