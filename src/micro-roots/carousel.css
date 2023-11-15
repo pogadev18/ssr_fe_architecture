@@ -1,6 +1,7 @@
 .carousel-wrapper {
   background-color: burlywood;
-  overflow: hidden
+  overflow: hidden;
+  margin-bottom: 25px;
 }
 
 /* define padding-md as a css variable and test
@@ -8,4 +9,3 @@ using it in another file */
 :root {
   --padding-md: 1rem;
 }
-

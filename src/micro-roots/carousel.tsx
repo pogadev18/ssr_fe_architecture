@@ -10,14 +10,39 @@ import './carousel-test-if-multiple-bundles-get-created.css';
 
 // mark this component as server only, so no React hydration
 // happens for it
-export const islandType = 'server-only'
+export const islandType = 'client-htmx';
+
+export const htmxActions = {
+  'more-products': async () => {
+    // Simulate a delay of 400ms
+    await new Promise((resolve) => setTimeout(resolve, 400));
+
+    // todo: fetch real products
+    // array of 10 fake products
+    const fakeProducts = Array.from({ length: 10 }, (_, i) => ({
+      titleLong: `Fake Product ${i + 1}`,
+      retailPriceNet_DE: Math.random() * 100,
+      assets: [
+        {
+          url: 'https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-7inch-bluetitanium?wid=5120&hei=2880&fmt=p-jpg&qlt=80&.v=1692845699311',
+          purpose: 'MAIN',
+        },
+      ],
+    }));
+
+    return fakeProducts.map((product) => (
+      <ProductHit key={product.titleLong} product={product} />
+    ));
+  },
+};
 
 function Carousel(props: {
   id: string;
   carouselProducts?: MinimalProductInformation[];
+  uniqueIdentifier: string;
 }) {
   return (
-    <div className="carousel-wrapper">
+    <div className="carousel-wrapper" id={`carousel-${props.uniqueIdentifier}`}>
       <h1 style={{ fontSize: '20px', fontWeight: 'bold' }}>
         Carousel {props.id}: {props.id}
       </h1>
@@ -35,6 +60,14 @@ function Carousel(props: {
           <ProductHit key={product.titleLong} product={product} />
         ))}
       </ul>
+      <button
+        hx-get="/htmx/carousel/more-products"
+        hx-target={`#carousel-${props.uniqueIdentifier} .products-wrapper`}
+        hx-swap="beforeend"
+        hx-trigger="click"
+      >
+        Load More products
+      </button>
     </div>
   );
 }
@@ -55,10 +88,12 @@ export const getStaticProps = async (ctx: GetStaticPropsParams) => {
     carouselConfig,
     mockedProductSearchQuery
   );
+
   return {
     props: {
       id: ctx.query.path,
       carouselProducts,
+      uniqueIdentifier: ctx.query.uniqueIdentifier,
     },
   };
 };

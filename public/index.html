@@ -1,24 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>React Islands</title>
+    <script src="https://unpkg.com/htmx.org@1.9.8" defer></script>
   </head>
-  
+
   <body>
     <!-- beware, commenting will still run the include, breaking the html generation -->
     <esi:include
-      src="/component/carousel/?path=/content/webshop30_de/de/gaming/xbox/ueberblick/dienste-und-abos/xbox-all-access/jcr:content/parMainContent/productcaroussel_cop&baseUrl=https://aem-aws-dev.cyberport.de&productSearchQuery=iphone"
+      src="/component/carousel/?path=/content/webshop30_de/de/gaming/xbox/ueberblick/dienste-und-abos/xbox-all-access/jcr:content/parMainContent/productcaroussel_cop&baseUrl=https://aem-aws-dev.cyberport.de&productSearchQuery=iphone&uniqueIdentifier=carousel1"
     />
     <esi:include
-      src="/component/carousel?path=/content/webshop30_de/de/apple-und-zubehoer/apple-dep/jcr:content/parMainContent/productcarousselcont_1900504225/parCarousselContainer/productcaroussel_cop&baseUrl=https://aem-aws-dev.cyberport.de&productSearchQuery=laptop"
+      src="/component/carousel?path=/content/webshop30_de/de/apple-und-zubehoer/apple-dep/jcr:content/parMainContent/productcarousselcont_1900504225/parCarousselContainer/productcaroussel_cop&baseUrl=https://aem-aws-dev.cyberport.de&productSearchQuery=laptop&uniqueIdentifier=carousel2"
     />
-    <esi:include
-        src="/component/component-with-assets"
-    />
-    <esi:include
-        src="/component/another-folder"
-    />
+    <esi:include src="/component/component-with-assets" />
+    <esi:include src="/component/another-folder" />
   </body>
 </html>

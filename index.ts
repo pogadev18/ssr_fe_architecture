@@ -100,6 +100,10 @@ app.get('/component/:compDeclaration', async (req, res) => {
         )
       );
 
+      const shouldAddHydrationScript =
+        DynamicComponent.islandType === 'client-and-server' ||
+        DynamicComponent.islandType === 'client-only';
+
       const uniqueIdentifier = `${compDeclaration}-${randomIdentifier()}`;
       // BEWARE! Even a \n in the comopentString breaks hydration. Took me 30 mins to debug :|
       const htmlChunks = [
@@ -111,7 +115,7 @@ app.get('/component/:compDeclaration', async (req, res) => {
             DynamicComponent.islandType ?? 'client-and-server'
           }'
           ${
-            DynamicComponent.islandType !== 'server-only'
+            shouldAddHydrationScript
               ? `data-island-js-chunk='${bundleURL}'`
               : ''
           }
@@ -119,7 +123,7 @@ app.get('/component/:compDeclaration', async (req, res) => {
         >${componentString}</div>`,
       ];
 
-      if (DynamicComponent.islandType !== 'server-only') {
+      if (shouldAddHydrationScript) {
         htmlChunks.push(`
         <script type="module" id="${uniqueIdentifier}">
           import * as React from 'react'
@@ -146,6 +150,39 @@ app.get('/component/:compDeclaration', async (req, res) => {
   }
 });
 
+app.get('/htmx/:compDeclaration/:action', async (req, res) => {
+  try {
+    const { compDeclaration } = req.params;
+    const componentMetaAndModule = getComponentMetadataAndCJSModule(
+      compDeclaration,
+      cjsManifest,
+      esmManifest
+    );
+
+    if (componentMetaAndModule) {
+      const { component: DynamicComponent } = componentMetaAndModule;
+      try {
+        const { htmxActions } = DynamicComponent;
+        const { action } = req.params;
+
+        if (htmxActions && htmxActions[action]) {
+          const component = await htmxActions[action]();
+          const html = ReactDOMServer.renderToString(component);
+          res.send(html);
+        }
+      } catch (error) {
+        console.log('error fetching static props for', compDeclaration, error);
+        res.status(500).send('An error occurred while fetching static props');
+      }
+    }
+  } catch (error) {
+    console.log(`${req.params.compDeclaration}`, error);
+    res
+      .status(500)
+      .json({ error: 'An error occurred while rendering the component.' });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
@@ -157,5 +194,10 @@ export type GetStaticPropsParams = Parameters<GetStaticPropsType>[0];
 export type ExpectedComponentModuleExports = {
   default: React.ComponentType & { getStaticProps?: GetStaticPropsType };
   getStaticProps?: GetStaticPropsType;
-  islandType?: 'server-only' | 'client-and-server' | 'client-only';
+  islandType?:
+    | 'server-only'
+    | 'client-and-server'
+    | 'client-only'
+    | 'client-htmx'; //todo: remove this and use one existing islandType
+  htmxActions?: Record<string, () => JSX.Element>;
 };
