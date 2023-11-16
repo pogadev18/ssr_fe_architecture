@@ -150,6 +150,7 @@ app.get('/component/:compDeclaration', async (req, res) => {
   }
 });
 
+// todo: query params
 app.get('/htmx/:compDeclaration/:action', async (req, res) => {
   try {
     const { compDeclaration } = req.params;

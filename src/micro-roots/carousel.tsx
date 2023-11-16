@@ -8,17 +8,13 @@ import ProductHit from '../components/product-hit';
 import styles from './carousel.module.css';
 import './carousel-test-if-multiple-bundles-get-created.css';
 
-// mark this component as server only, so no React hydrat ion
-// happens for it
-export const islandType = 'client-htmx';
+export const islandType = 'client-only'; // todo: rename to 'server-only'??
 
 export const htmxActions = {
   'more-products': async () => {
-    // Simulate a delay of 400ms
     await new Promise((resolve) => setTimeout(resolve, 400));
 
     // todo: fetch real products
-    // array of 10 fake products
     const fakeProducts = Array.from({ length: 10 }, (_, i) => ({
       titleLong: `Apple iPhone 13 Pro Max 128 GB Gold MLL83ZD/A ${i + 1}`,
       retailPriceNet_DE: Math.random() * 100,
