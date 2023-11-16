@@ -1,21 +1,23 @@
 import type { MinimalProductInformation } from '../types/shared';
 
+import styles from './product-hit.module.css';
+
 type ProductHitProps = {
   product: MinimalProductInformation;
 };
 
 const ProductHit = ({ product }: ProductHitProps) => {
   return (
-    <li style={{ width: '100%', textAlign: 'center' }}>
-      <div className="product-image">
+    <li className={styles.productWrapper}>
+      <div>
         <img
+          className={styles.productImage}
           src={product.assets[0].url}
           alt={product.titleLong}
-          style={{ width: '100%' }}
         />
       </div>
-      <h2 style={{ fontSize: '18px' }}>{product.titleLong}</h2>
-      <p style={{ fontWeight: 'bold' }}>{product.retailPriceNet_DE} EUR</p>
+      <h2 className={styles.productTitle}>{product.titleLong}</h2>
+      <p className={styles.productPrice}>{product.retailPriceNet_DE} EUR</p>
     </li>
   );
 };

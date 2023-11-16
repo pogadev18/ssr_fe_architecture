@@ -23,5 +23,5 @@ type Sort = {
 export type MinimalProductInformation = {
   titleLong: string;
   retailPriceNet_DE: number;
-  assets: [{ url: string; purpose: string }];
+  assets: { url: string; purpose: string }[];
 };
