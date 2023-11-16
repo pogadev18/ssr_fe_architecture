@@ -1,0 +1,36 @@
+.carouselWrapper {
+  overflow: hidden;
+  margin-bottom: 45px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 0 0 15px 15px;
+}
+
+.productsWrapper {
+  display: flex;
+  gap: 40px;
+  width: 900px;
+  list-style: none;
+  overflow-x: auto;
+}
+
+.loadMoreButton {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.loadMoreButton:hover {
+  background-color: #0056b3;
+  transform: scale(1.05);
+}
+
+/* define padding-md as a css variable and test
+  using it in another file */
+:root {
+  --padding-md: 1rem;
+}
