@@ -8,7 +8,7 @@ import ProductHit from '../components/product-hit';
 import styles from './carousel.module.css';
 import './carousel-test-if-multiple-bundles-get-created.css';
 
-export const islandType = 'client-only'; // todo: rename to 'server-only'??
+export const islandType = 'client-htmx'; // todo: rename to 'server-only'??
 
 export const htmxActions = {
   'more-products': async () => {
